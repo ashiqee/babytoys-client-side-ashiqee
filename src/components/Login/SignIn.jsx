@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const SignIn = () => {
@@ -19,7 +20,15 @@ const SignIn = () => {
         console.log(res.user);
         navigate(location?.state ? location.state : "/");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Your Email or Password is Invalid <br>${error.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
 
   const handleGoogleLogin = () => {
