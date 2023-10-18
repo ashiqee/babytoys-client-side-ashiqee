@@ -6,8 +6,7 @@ const Products = () => {
 
   return (
     <div className="w-fit mx-auto">
-      {toysProducts.length}
-
+      <h2 className="text-4xl text-center p-6">Our Products</h2>
       <div className="grid gap-8 mx-auto lg:grid-cols-4 md:grid-cols-3 grid-cols-1 ">
         {toysProducts.map((toy) => (
           <ProductCard key={toy._id} toy={toy} />

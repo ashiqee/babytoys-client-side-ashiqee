@@ -7,6 +7,7 @@ import Root from "../MainLayout/Root";
 import MyCart from "../MyCart/MyCart";
 import SignUp from "../Registration/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import BrandProducts from "../Home/Brands/BrandProducts";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
             <AddProduct />
           </PrivateRoute>
         ),
+        loader: () => fetch("../../../public/brandData.json"),
       },
       {
         path: "/my-cart",
@@ -44,6 +46,12 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/toys/${params.id}`),
+      },
+
+      {
+        path: "/brand/:brandName",
+        element: <BrandProducts />,
+        loader: ``,
       },
       {
         path: "/signup",

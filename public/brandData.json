@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "img": "https://i.ibb.co/2M31Wk3/hot-wheels-1.webp",
+    "brandName": "Hot Wheel"
+  },
+  {
+    "id": 2,
+    "img": "https://i.ibb.co/wYJt9hH/funskool-logo.webp",
+    "brandName": "FunsKool"
+  },
+  {
+    "id": 3,
+    "img": "https://i.ibb.co/y43ZSL3/Fisher-Price.webp",
+    "brandName": "Fisher Price"
+  },
+  {
+    "id": 4,
+    "img": "https://i.ibb.co/bWWVSy3/barbie.webp",
+    "brandName": "Barbie"
+  },
+  {
+    "id": 5,
+    "img": "https://i.ibb.co/ZT6LPkZ/Thomas-Friends.webp",
+    "brandName": "Thomas & Friend"
+  },
+  {
+    "id": 6,
+    "img": "https://i.ibb.co/Xjmnz4Y/disnep-princess.webp",
+    "brandName": "Disnep Princess"
+  }
+]

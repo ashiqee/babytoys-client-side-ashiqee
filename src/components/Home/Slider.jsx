@@ -41,13 +41,22 @@ const Slider = () => {
               />
             </div>
           </SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
+          <SwiperSlide>
+            <div className="max-w-20 flex bg-opacity-50">
+              {" "}
+              <img
+                className="animate-bounce   max-h-[200px] md:min-h-[200px]  md:max-h-[600px]"
+                src="https://static.vecteezy.com/system/resources/previews/009/376/141/original/3d-basket-ball-illustration-png.png"
+                alt=""
+              />
+              <img
+                className="animate-spin hover:animate-bounce   max-h-[200px] md:min-h-[200px]  md:max-h-[600px]"
+                src="https://static.vecteezy.com/system/resources/previews/009/376/141/original/3d-basket-ball-illustration-png.png"
+                alt=""
+              />
+            </div>
+          </SwiperSlide>
           <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
-          <SwiperSlide>Slide 9</SwiperSlide>
         </Swiper>
       </div>
     </div>
