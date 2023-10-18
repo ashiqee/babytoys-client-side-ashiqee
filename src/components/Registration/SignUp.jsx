@@ -1,16 +1,20 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignUp = (e) => {
     e.preventDefault();
 
     const form = e.target;
     const name = form.name.value;
+    const profilePic = form.profileImage.value;
     const email = form.email.value;
     const password = form.password.value;
 
@@ -52,6 +56,35 @@ const SignUp = () => {
     createUser(email, password)
       .then((res) => {
         console.log(res.user);
+
+        navigate(location?.state ? location.state : "/");
+
+        updateProfile(res.user, {
+          displayName: name,
+          photoURL: profilePic,
+        })
+          .then(() => {
+            console.log("Update Profile");
+          })
+          .catch();
+
+        //user data send database
+        const userName = name;
+        const user = { email, userName: userName, profilePic };
+
+        fetch("http://localhost:5000/user", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              console.log("User added to Database");
+            }
+          });
       })
       .catch(() => {
         Swal.fire({
@@ -76,8 +109,7 @@ const SignUp = () => {
               <span> Already have an account? </span>
               <Link
                 to="/login"
-                className="text-blue-700 hover:underline dark:text-blue-500"
-              >
+                className="text-blue-700 hover:underline dark:text-blue-500">
                 Login here
               </Link>
             </p>
@@ -92,6 +124,18 @@ const SignUp = () => {
                   type="text"
                   name="name"
                   placeholder="Enter your first and last name"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Profile Pic</span>
+                </label>
+                <input
+                  type="text"
+                  name="profileImage"
+                  placeholder="paste profile image link"
                   className="input input-bordered"
                   required
                 />
