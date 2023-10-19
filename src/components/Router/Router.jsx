@@ -49,9 +49,10 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/brand/:brandName",
+        path: "/toysBrand/:id",
         element: <BrandProducts />,
-        loader: ``,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/toysBrand/${params.id}`),
       },
       {
         path: "/signup",
