@@ -14,7 +14,8 @@ const BrandProductCard = ({ toys }) => {
 
   return (
     <div>
-      <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      {/* card section  */}
+      <div className="w-full mx-auto max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <img
           className=" mx-auto p-3 min-h-[320px] max-h-[320px] transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 rounded-3xl"
           src={productImage}

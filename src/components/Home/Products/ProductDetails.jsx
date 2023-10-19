@@ -4,9 +4,14 @@ import Rating from "react-rating";
 // import { FaBeer } from "react-icons/fa";
 import { useLoaderData } from "react-router-dom";
 import PageHeader from "../../Shared/PageHeader";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 const ProductDetails = () => {
   const toyDetails = useLoaderData();
   const [quantityStart, setQuantity] = useState(1);
+
+  const { user } = useContext(AuthContext);
 
   const {
     _id,
@@ -19,6 +24,33 @@ const ProductDetails = () => {
     rating,
   } = toyDetails;
 
+  const handleAddToCart = (productId) => {
+    //send cart data to server
+    const userId = user.uid;
+
+    const userCart = { productId, userId };
+
+    fetch("http://localhost:5000/cart", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userCart),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "success",
+            text: "Product Added to Cart Successfully",
+            icon: "success",
+            confirmButtonText: "Add more",
+          });
+        }
+      });
+  };
+
   return (
     <div>
       <PageHeader toyDetails={toyDetails} />
@@ -26,8 +58,7 @@ const ProductDetails = () => {
         <a
           href="#"
           className="flex flex-col  bg-white gap-16 border-gray-200 rounded-lg shadow md:flex-row
-         md:max-w-full mx-auto dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-        >
+         md:max-w-full mx-auto dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
           <img
             className="object-fit min-h-[40vh] md:max-w-[60vh] mx-4  rounded-t-lg    rounded-lg"
             src={productImage}
@@ -85,20 +116,23 @@ const ProductDetails = () => {
                         }
                         count - 1;
                       })
-                    }
-                  >
+                    }>
                     -
                   </button>
                   <h2 className="text-2xl">{quantityStart}</h2>
                   <button
                     className="p-2 text-xl"
-                    onClick={() => setQuantity((count) => count + 1)}
-                  >
+                    onClick={() => setQuantity((count) => count + 1)}>
                     +
                   </button>
                 </div>
               </div>
-              <button className="btn mt-6 bg-blue-300"> Add Cart</button>
+              <button
+                onClick={() => handleAddToCart(_id)}
+                className="btn mt-6 bg-blue-300">
+                {" "}
+                Add Cart
+              </button>
             </div>
           </div>
         </a>
