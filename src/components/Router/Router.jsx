@@ -10,11 +10,13 @@ import PrivateRoute from "./PrivateRoute";
 import BrandProducts from "../Home/Brands/BrandProducts";
 import UpdateProduct from "../Home/Products/UpdateProduct";
 import DashBoard from "../DashBoard/DashBoard";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
 
     children: [
       {
@@ -52,7 +54,16 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/cart/${params.id}`),
       },
-
+      {
+        path: "/cart/:id",
+        element: (
+          <PrivateRoute>
+            <MyCart />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/cart/${params.id}`),
+      },
       {
         path: `/details/:id`,
         element: (
