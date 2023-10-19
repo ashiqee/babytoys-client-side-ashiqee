@@ -1,5 +1,5 @@
 import Banner from "./Banner";
-import BannerTwo from "./Bannner/BannerTwo";
+import BannerTwo from "./Banner/BannerTwo";
 import Brands from "./Brands/Brands";
 import Products from "./Products/Products";
 import Slider from "./Slider";

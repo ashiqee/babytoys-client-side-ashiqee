@@ -1,11 +1,33 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddProduct = () => {
-  const brands = useLoaderData();
+const UpdateProduct = () => {
+  const productData = useLoaderData();
+  const [brands, setBrand] = useState([]);
 
+  const {
+    _id,
+    productImage,
+    productName,
+    brand,
+    price,
+    category,
+    rating,
+    description,
+  } = productData;
+
+  console.log(productData);
   console.log(brands);
-  const handleAddProduct = (e) => {
+
+  useEffect(() => {
+    fetch("http://localhost:5000/brand")
+      .then((res) => res.json())
+      .then((data) => setBrand(data));
+  }, []);
+
+  const handleUpdateProduct = (e) => {
     e.preventDefault();
 
     const form = e.target;
@@ -16,7 +38,8 @@ const AddProduct = () => {
     const category = form.category.value;
     const rating = form.rating.value;
     const description = form.description.value;
-    const productData = {
+
+    const updateProduct = {
       productImage,
       productName,
       brand,
@@ -26,39 +49,38 @@ const AddProduct = () => {
       description,
     };
 
-    console.log(productData);
+    console.log(updateProduct);
+    //send data
 
-    //send product data to server
-
-    fetch("http://localhost:5000/toys", {
-      method: "POST",
+    fetch(`http://localhost:5000/toys/${_id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(productData),
+      body: JSON.stringify(updateProduct),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.insertedId) {
+        if (data.modifiedCount) {
           Swal.fire({
-            title: "Success!",
-            text: "Product Added Successfully",
+            title: "success",
+            text: "Product Update Successfully",
             icon: "success",
-            confirmButtonText: "Add More",
+            confirmButtonText: "Done",
           });
-          form.reset();
         }
       });
   };
+
   return (
     <div>
       <section className="bg-white dark:bg-gray-900">
         <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
           <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-            Add a new product
+            Update product
           </h2>
-          <form onSubmit={handleAddProduct}>
+          <form onSubmit={handleUpdateProduct}>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div className="sm:col-span-2">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -67,6 +89,7 @@ const AddProduct = () => {
                 <input
                   type="text"
                   name="image"
+                  defaultValue={productImage}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Paste product image link"
                   required
@@ -79,6 +102,7 @@ const AddProduct = () => {
                 <input
                   type="text"
                   name="productName"
+                  defaultValue={productName}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type product name"
                   required
@@ -88,16 +112,10 @@ const AddProduct = () => {
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Brand
                 </label>
-                {/* <input
-                  type="text"
-                  name="brand"
-                  id="brand"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Product brand"
-                  required=""
-                /> */}
+
                 <select
                   id="category"
+                  defaultValue={brand}
                   name="brand"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                   <option>Select Brand</option>
@@ -115,9 +133,10 @@ const AddProduct = () => {
                 <input
                   type="number"
                   name="price"
+                  defaultValue={price}
                   id="price"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="$2999"
+                  placeholder="2999"
                   required=""
                 />
               </div>
@@ -127,6 +146,7 @@ const AddProduct = () => {
                 </label>
                 <select
                   id="category"
+                  defaultValue={category}
                   name="category"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                   <option>Select category</option>
@@ -176,6 +196,7 @@ const AddProduct = () => {
                 </label>
                 <textarea
                   id="description"
+                  defaultValue={description}
                   rows="6"
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Your description here"></textarea>
@@ -185,7 +206,7 @@ const AddProduct = () => {
             <button
               type="submit"
               className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-              Add product
+              Update Product
             </button>
           </form>
         </div>
@@ -194,4 +215,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

@@ -26,7 +26,7 @@ const BrandProductCard = ({ toys }) => {
           <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
             {productName}
           </h5>
-
+          <h4>Brand: {brand}</h4>
           <div className="flex items-center mt-2.5 mb-5">
             <svg
               className="w-4 h-4 text-yellow-300 mr-1"
@@ -72,10 +72,16 @@ const BrandProductCard = ({ toys }) => {
               5.0
             </span>
           </div>
+          <p className="py-2">{description?.slice(0, 40)}</p>
           <div className="flex items-center justify-between">
             <span className="text-2xl font-bold text-gray-900 dark:text-white">
               ৳ {price}
             </span>
+            <Link
+              to={`/update/${_id}`}
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              Update
+            </Link>
             <Link
               to={`/details/${_id}`}
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

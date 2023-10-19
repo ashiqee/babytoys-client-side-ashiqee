@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Rating from "react-rating";
 
 // import { FaBeer } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import PageHeader from "../../Shared/PageHeader";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+
 const ProductDetails = () => {
+  const navigate = useNavigate();
   const toyDetails = useLoaderData();
   const [quantityStart, setQuantity] = useState(1);
 
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   const {
     _id,
@@ -28,7 +30,16 @@ const ProductDetails = () => {
     //send cart data to server
     const userId = user.uid;
 
-    const userCart = { productId, userId };
+    const userCart = {
+      productId,
+      brand,
+      price,
+      _id,
+      productName,
+      productImage,
+      userId,
+      quantityStart,
+    };
 
     fetch("http://localhost:5000/cart", {
       method: "POST",
@@ -40,6 +51,7 @@ const ProductDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+
         if (data.insertedId) {
           Swal.fire({
             title: "success",
@@ -47,6 +59,15 @@ const ProductDetails = () => {
             icon: "success",
             confirmButtonText: "Add more",
           });
+          navigate("/");
+        } else {
+          Swal.fire({
+            title: "success",
+            text: "Already Added in Cart",
+            icon: "success",
+            confirmButtonText: "Add more",
+          });
+          return;
         }
       });
   };
@@ -74,25 +95,6 @@ const ProductDetails = () => {
 
             <div>
               <Rating />
-              {/* <Rating
-                stop={6}
-                emptySymbol={[
-                  "fa fa-star-o fa-2x low",
-                  "fa fa-star-o fa-2x low",
-                  "fa fa-star-o fa-2x medium",
-                  "fa fa-star-o fa-2x medium",
-                  "fa fa-star-o fa-2x high",
-                  "fa fa-star-o fa-2x high",
-                ]}
-                fullSymbol={[
-                  "fa fa-star fa-2x low",
-                  "fa fa-star fa-2x low",
-                  "fa fa-star fa-2x medium",
-                  "fa fa-star fa-2x medium",
-                  "fa fa-star fa-2x high",
-                  "fa fa-star fa-2x high",
-                ]}
-              /> */}
             </div>
 
             <p className="mb-3 text-xl font-bold text-gray-700 dark:text-gray-400">
@@ -136,6 +138,15 @@ const ProductDetails = () => {
             </div>
           </div>
         </a>
+
+        <div
+          tabIndex={0}
+          className="collapse mt-10  bg-primary text-black focus:bg-blue-100 focus:text-black">
+          <div className="collapse-title text-xl">Description</div>
+          <div className="collapse-content">
+            <div className="text-xl">{description}</div>
+          </div>
+        </div>
       </div>
     </div>
   );

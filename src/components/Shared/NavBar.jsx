@@ -20,7 +20,7 @@ const NavBar = () => {
         <NavLink to="/add-product">Add Product</NavLink>
       </li>
       <li>
-        <NavLink to="/my-cart">My Cart</NavLink>
+        <NavLink to={`/cart/${user?.uid}`}>My Cart</NavLink>
       </li>
     </>
   );
@@ -69,7 +69,7 @@ const NavBar = () => {
               <>
                 <div>
                   <div className="flex gap-5">
-                    <div className="dropdown dropdown-end">
+                    <div className="dropdown z-50 dropdown-end">
                       <label tabIndex={0} className="btn btn-ghost btn-circle">
                         <div className="indicator">
                           <svg
@@ -108,18 +108,27 @@ const NavBar = () => {
                       <label
                         tabIndex={0}
                         className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
+                        <div className="w-12 rounded-full">
                           <img src={user.photoURL} />
                         </div>
                       </label>
                       <ul
                         tabIndex={0}
-                        className="menu menu-lg dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        className="menu menu-lg dropdown-content mt-3 z-[50] p-2 shadow bg-base-100 rounded-box w-52">
                         <li>
+                          <div className=" avatar ">
+                            <img
+                              className="w-24 rounded-full"
+                              src={user.photoURL}
+                            />
+                          </div>
                           <a className="justify-between">
                             {user.displayName}
                             <span className="badge">New</span>
                           </a>
+                        </li>
+                        <li>
+                          <Link to="/dashboard">Dashboard</Link>
                         </li>
 
                         <li>

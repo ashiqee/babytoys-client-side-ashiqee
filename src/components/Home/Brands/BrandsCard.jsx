@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const BrandsCard = ({ brand }) => {
   const { img, brandName } = brand;
-  const navigate = useNavigate();
 
   //   const handleBrand = (brandName) => {
   //     console.log(brandName);

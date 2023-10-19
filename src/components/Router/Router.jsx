@@ -8,6 +8,8 @@ import MyCart from "../MyCart/MyCart";
 import SignUp from "../Registration/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import BrandProducts from "../Home/Brands/BrandProducts";
+import UpdateProduct from "../Home/Products/UpdateProduct";
+import DashBoard from "../DashBoard/DashBoard";
 
 const router = createBrowserRouter([
   {
@@ -27,16 +29,30 @@ const router = createBrowserRouter([
             <AddProduct />
           </PrivateRoute>
         ),
-        loader: () => fetch("../../../public/brandData.json"),
+        loader: () => fetch("http://localhost:5000/brand"),
+      },
+
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateProduct />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/toys/${params.id}`),
       },
       {
-        path: "/my-cart",
+        path: "/cart/:id}",
         element: (
           <PrivateRoute>
             <MyCart />
           </PrivateRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/cart/${params.id}`),
       },
+
       {
         path: `/details/:id`,
         element: (
@@ -58,6 +74,7 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/toysBrand/${params.id}`),
       },
+
       {
         path: "/signup",
         element: <SignUp />,
@@ -65,6 +82,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <SignIn />,
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <DashBoard />
+          </PrivateRoute>
+        ),
       },
     ],
   },
