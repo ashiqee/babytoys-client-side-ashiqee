@@ -6,7 +6,7 @@ const Brands = () => {
 
   useEffect(() => {
     fetch(
-      "https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/brand"
+      "https://b8a10-brandshop-server-side-ashiqee-p1ft66iy3-ashiqee.vercel.app/brand"
     )
       .then((res) => res.json())
       .then((data) => {

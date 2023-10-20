@@ -73,7 +73,7 @@ const SignUp = () => {
         const user = { email, userName: userName, profilePic };
 
         fetch(
-          "https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/user",
+          "https://b8a10-brandshop-server-side-ashiqee-p1ft66iy3-ashiqee.vercel.app/user",
           {
             method: "POST",
             headers: {

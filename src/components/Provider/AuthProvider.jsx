@@ -17,12 +17,10 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [cartLoad, setCartLoad] = useState(true);
+  // const [cartLoad, setCartLoad] = useState(true);
 
-  const [cart, setCart] = useState(0);
+  // const [cart, setCart] = useState(0);
   const [cartData, setCartData] = useState([]);
-
-  console.log(cartData.length);
 
   // Create User
   const createUser = (email, password) => {
@@ -47,12 +45,12 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  // const cartUrl = `https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/cart/${user?.uid}`;
+  // const cartUrl = `https://b8a10-brandshop-server-side-ashiqee-p1ft66iy3-ashiqee.vercel.app/cart/${user?.uid}`;
 
   const fetchData = async () => {
     try {
       await fetch(
-        `https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/cart/${user?.uid}`
+        `https://b8a10-brandshop-server-side-ashiqee-p1ft66iy3-ashiqee.vercel.app/cart/${user?.uid}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -72,7 +70,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unSubscribe();
     };
-  });
+  }, []);
 
   const userInfo = {
     user,
@@ -82,7 +80,7 @@ const AuthProvider = ({ children }) => {
     logOut,
     googleLogin,
     cartData,
-    cartLoad,
+
     fetchData,
   };
   return (

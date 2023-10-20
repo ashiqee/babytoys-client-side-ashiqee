@@ -22,7 +22,7 @@ const BrandAdd = () => {
     //send data base
 
     fetch(
-      "https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/brand",
+      "https://b8a10-brandshop-server-side-ashiqee-p1ft66iy3-ashiqee.vercel.app/brand",
       {
         method: "POST",
         headers: {
