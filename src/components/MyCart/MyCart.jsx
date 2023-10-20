@@ -9,7 +9,6 @@ const MyCart = () => {
   // const [userId, setUserId] = useState(null);
   const loadCartData = useLoaderData();
   const [cart, setCart] = useState(loadCartData);
-  console.log(cart);
 
   const { user } = useContext(AuthContext);
 

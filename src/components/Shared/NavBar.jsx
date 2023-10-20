@@ -1,15 +1,38 @@
-import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, NavLink, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, loading } = useContext(AuthContext);
+  const [cart, setCart] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleLogOut = () => {
     logOut()
       .then()
       .catch((error) => console.error(error));
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/cart/${user?.uid}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCart(data.length);
+        let totalPrice = [];
+        data?.map((b) => {
+          const price = b.price;
+          totalPrice.push(price);
+        });
+
+        console.log(totalPrice);
+        let itemPrice = 0;
+        totalPrice?.forEach((price) => {
+          return (itemPrice += parseInt(price));
+        });
+
+        setTotalPrice(itemPrice);
+      });
+  }, [user]);
 
   const navMenu = (
     <>
@@ -27,7 +50,7 @@ const NavBar = () => {
   return (
     <div>
       <div className=" bg-base-200">
-        <div className="max-w-screen-2xl mx-auto navbar">
+        <div className="max-w-screen-xl mx-auto navbar">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -86,7 +109,7 @@ const NavBar = () => {
                             />
                           </svg>
                           <span className="badge badge-sm indicator-item">
-                            8
+                            {cart}
                           </span>
                         </div>
                       </label>
@@ -94,12 +117,18 @@ const NavBar = () => {
                         tabIndex={0}
                         className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
                         <div className="card-body">
-                          <span className="font-bold text-lg">8 Items</span>
-                          <span className="text-info">Subtotal: $999</span>
+                          <span className="font-bold text-lg">
+                            {cart} Items
+                          </span>
+                          <span className="text-info">
+                            Subtotal: {totalPrice}
+                          </span>
                           <div className="card-actions">
-                            <button className="btn btn-primary btn-block">
+                            <Link
+                              to={`/cart/${user?.uid}`}
+                              className="btn btn-primary btn-block">
                               View cart
-                            </button>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -109,7 +138,7 @@ const NavBar = () => {
                         tabIndex={0}
                         className="btn btn-ghost btn-circle avatar">
                         <div className="w-12 rounded-full">
-                          <img src={user.photoURL} />
+                          <img src={user?.photoURL} />
                         </div>
                       </label>
                       <ul
@@ -119,7 +148,7 @@ const NavBar = () => {
                           <div className=" avatar ">
                             <img
                               className="w-24 rounded-full"
-                              src={user.photoURL}
+                              src={user?.photoURL}
                             />
                           </div>
                           <a className="justify-between">

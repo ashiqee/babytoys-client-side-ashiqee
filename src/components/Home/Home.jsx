@@ -1,3 +1,4 @@
+import { useLoaderData } from "react-router-dom";
 import Banner from "./Banner";
 import BannerTwo from "./Banner/BannerTwo";
 import Brands from "./Brands/Brands";

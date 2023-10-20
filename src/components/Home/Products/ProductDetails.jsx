@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Rating from "react-rating";
 
 // import { FaBeer } from "react-icons/fa";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import PageHeader from "../../Shared/PageHeader";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
   const [quantityStart, setQuantity] = useState(1);
 
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [alreadyCart, setAlreadyCart] = useState(null);
 
   console.log(alreadyCart);
@@ -89,22 +89,28 @@ const ProductDetails = () => {
   return (
     <div>
       <PageHeader toyDetails={toyDetails} />
-      <div className="max-w-7xl mx-auto">
-        <a
-          href="#"
-          className="flex flex-col  bg-white gap-16 border-gray-200 rounded-lg shadow md:flex-row
-         md:max-w-full mx-auto dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-          <img
-            className="object-fit min-h-[40vh] md:max-w-[60vh] mx-4  rounded-t-lg    rounded-lg"
-            src={productImage}
-            alt=""
-          />
-          <div className="flex flex-col border justify-items-start  p-4 leading-normal">
+      <div className="max-w-7xl mx-auto ">
+        <div className="lg:flex justify-between">
+          <div
+            className="flex flex-col-reverse  border shadow-lg  bg-white gap-16  rounded-lg md:flex-row
+         md:max-w-full p-4  dark:bg-gray-800 dark:hover:bg-gray-700">
+            <img
+              className="object-cover  w-24 h-24  p-2  rounded-lg"
+              src={productImage}
+              alt={productName}
+            />
+            <img
+              className="object-fit min-h-[40vh] md:max-w-[60vh]    rounded-lg"
+              src={productImage}
+              alt={productName}
+            />
+          </div>
+          <div className="flex flex-col shadow-lg border rounded-lg justify-items-start  p-4 leading-normal">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {productName}
             </h5>
-            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {brand}
+            <h5 className="mb-2 text-xl font-bold tracking-tight text-rose-400 dark:text-white">
+              <Link to={`/toysBrand/${brand}`}> Brand: {brand}</Link>
             </h5>
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               {category}
@@ -154,14 +160,63 @@ const ProductDetails = () => {
               </button>
             </div>
           </div>
-        </a>
+        </div>
 
-        <div
-          tabIndex={0}
-          className="collapse mt-10  bg-primary text-black focus:bg-blue-100 focus:text-black">
-          <div className="collapse-title text-xl">Description</div>
-          <div className="collapse-content">
-            <div className="text-xl">{description}</div>
+        <div className="drawer mt-10">
+          <input id="my-drawer-3 " type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content flex flex-col">
+            {/* Navbar */}
+            <div className="w-full navbar bg-base-300">
+              <div className="flex-none lg:hidden">
+                <label
+                  htmlFor="my-drawer-3"
+                  aria-label="open sidebar"
+                  className="btn btn-square btn-ghost">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    className="inline-block w-6 h-6 stroke-current">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                </label>
+              </div>
+              <div className="flex-1 px-2 mx-2">Description</div>
+              <div className="flex-none hidden lg:block">
+                <ul className="menu menu-horizontal">
+                  {/* Navbar menu content here */}
+
+                  <li>
+                    <Link to={`/toysBrand/${brand}`}>{brand}</Link>
+                  </li>
+                  <li>
+                    <Link to={`/cart/${user.uid}`}>View Cart</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {/* Page content here */}
+
+            <div className="p-10 text-justify"> {description}</div>
+          </div>
+          <div className="drawer-side">
+            <label
+              htmlFor="my-drawer-3"
+              aria-label="close sidebar"
+              className="drawer-overlay"></label>
+            <ul className="menu p-4 w-80 min-h-full bg-base-200">
+              {/* Sidebar content here */}
+              <li>
+                <a>{brand}</a>
+              </li>
+              <li>
+                <Link to={`/cart/${user.uid}`}>View Cart</Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

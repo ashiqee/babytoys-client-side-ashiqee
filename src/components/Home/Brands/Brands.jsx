@@ -23,7 +23,7 @@ const Brands = () => {
 
       <div className="grid grid-cols-3  md:grid-cols-6 justify-between">
         {brands.map((brand) => (
-          <BrandsCard key={brand.id} brand={brand} />
+          <BrandsCard key={brand._id} brand={brand} />
         ))}
       </div>
     </div>
