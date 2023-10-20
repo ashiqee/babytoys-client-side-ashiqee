@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import imgOne from "../../assets/Images/banner-1.jpg";
+
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -17,17 +19,17 @@ const Slider = () => {
         <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
           <SwiperSlide>
             <img
-              className="max-h-[200px] rounded-lg md:min-h-[600px]  md:max-h-[600px]"
-              src="https://thumbs.dreamstime.com/z/baby-kids-toys-frame-white-banner-background-many-colorful-educational-toys-top-view-flat-lay-baby-kids-toys-frame-244143378.jpg?w=992"
+              className="max-h-[200px]   rounded-lg md:min-h-[600px]  md:max-h-[600px]"
+              src={imgOne}
               alt=""
             />
-            <div className="relative  right-52  md:right-72">
+            <div className="relative  ">
               <img
-                className="w-96 h-96"
+                className="md:min-w-[400px] md:left-0 relative -left-96 h-[400px] "
                 src="https://i.pinimg.com/originals/8c/1d/ef/8c1def6c5ac57eb9e6624d87eb2ce818.gif"
                 alt=""
               />
-              <h2 className="md:py-2 relative md:-right-24  text-white rounded-2xl w-28  px-2 bg-blue-400">
+              <h2 className="md:py-2 relative md:-right-32 -left-20 text-white rounded-2xl w-28  px-2 bg-blue-400">
                 Shop Now
               </h2>
             </div>
@@ -56,7 +58,6 @@ const Slider = () => {
               />
             </div>
           </SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
         </Swiper>
       </div>
     </div>

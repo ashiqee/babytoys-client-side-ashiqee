@@ -24,7 +24,9 @@ const ProductCard = ({ toy }) => {
           <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
             {productName}
           </h5>
-
+          <h5 className="text-md font-semibold tracking-tight text-gray-900 dark:text-white">
+            Brand: {brand}
+          </h5>
           <div className="flex items-center mt-2.5 mb-5">
             <svg
               className="w-4 h-4 text-yellow-300 mr-1"
