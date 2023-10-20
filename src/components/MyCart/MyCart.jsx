@@ -15,7 +15,7 @@ const MyCart = () => {
 
   // useEffect(() => {
   //   if (user) {
-  //     fetch(`https://b8a10-brandshop-server-side-ashiqee-p1ft66iy3-ashiqee.vercel.app/cart/${user.uid}`)
+  //     fetch(`https://b8a10-brandshop-server-side-ashiqee-rcr2s7163-ashiqee.vercel.app/cart/${user.uid}`)
   //       .then((res) => res.json())
   //       .then((data) => setCart(data));
   //   }
@@ -34,7 +34,7 @@ const MyCart = () => {
       if (result.isConfirmed) {
         console.log("Deleted Confirm");
         fetch(
-          `https://b8a10-brandshop-server-side-ashiqee-p1ft66iy3-ashiqee.vercel.app/cart/${_id}`,
+          `https://b8a10-brandshop-server-side-ashiqee-rcr2s7163-ashiqee.vercel.app/cart/${_id}`,
           {
             method: "delete",
           }
