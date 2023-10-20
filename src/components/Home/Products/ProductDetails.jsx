@@ -31,7 +31,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetch(
-      `https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/cart/${user.uid}`
+      `https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/cart/${user?.uid}`
     )
       .then((res) => res.json())
       .then((data) => {
