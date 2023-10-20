@@ -31,7 +31,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetch(
-      `https://b8a10-brandshop-server-side-ashiqee-rcr2s7163-ashiqee.vercel.app/cart/${user?.uid}`
+      `https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/cart/${user?.uid}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -69,7 +69,7 @@ const ProductDetails = () => {
     }
 
     fetch(
-      "https://b8a10-brandshop-server-side-ashiqee-rcr2s7163-ashiqee.vercel.app/cart",
+      "https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/cart",
       {
         method: "POST",
         headers: {
