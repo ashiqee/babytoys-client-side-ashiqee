@@ -72,13 +72,16 @@ const SignUp = () => {
         const userName = name;
         const user = { email, userName: userName, profilePic };
 
-        fetch("http://localhost:5000/user", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
+        fetch(
+          "https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/user",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.insertedId) {

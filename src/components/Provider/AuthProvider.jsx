@@ -47,11 +47,13 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  // const cartUrl = `http://localhost:5000/cart/${user?.uid}`;
+  // const cartUrl = `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/cart/${user?.uid}`;
 
   const fetchData = async () => {
     try {
-      await fetch(`http://localhost:5000/cart/${user?.uid}`)
+      await fetch(
+        `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/cart/${user?.uid}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setCartData(data);

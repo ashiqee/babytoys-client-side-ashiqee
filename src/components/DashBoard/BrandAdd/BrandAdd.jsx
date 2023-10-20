@@ -21,13 +21,16 @@ const BrandAdd = () => {
 
     //send data base
 
-    fetch("http://localhost:5000/brand", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(brands),
-    })
+    fetch(
+      "https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/brand",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(brands),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

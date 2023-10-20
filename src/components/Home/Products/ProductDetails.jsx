@@ -28,6 +28,20 @@ const ProductDetails = () => {
     rating,
   } = toyDetails;
 
+  useEffect(() => {
+    fetch(
+      `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/cart/${user.uid}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        data.filter((b) => {
+          if (b.productId === _id) {
+            setAlreadyCart(b.productId);
+          }
+        });
+      });
+  }, [user, _id]);
+
   const handleAddToCart = (productId) => {
     //send cart data to server
     const userId = user.uid;
@@ -52,13 +66,16 @@ const ProductDetails = () => {
       });
     }
 
-    fetch("http://localhost:5000/cart", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(userCart),
-    })
+    fetch(
+      "https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/cart",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userCart),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -74,18 +91,6 @@ const ProductDetails = () => {
         }
       });
   };
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/cart/${user.uid}`)
-      .then((res) => res.json())
-      .then((data) => {
-        data.filter((b) => {
-          if (b.productId === _id) {
-            setAlreadyCart(b.productId);
-          }
-        });
-      });
-  }, [user, _id]);
 
   return (
     <div>

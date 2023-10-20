@@ -22,7 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5000/toys"),
+        loader: () =>
+          fetch(
+            "https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/toys"
+          ),
       },
       {
         path: "/add-product",
@@ -31,7 +34,10 @@ const router = createBrowserRouter([
             <AddProduct />
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/brand"),
+        loader: () =>
+          fetch(
+            "https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/brand"
+          ),
       },
 
       {
@@ -42,7 +48,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/toys/${params.id}`),
+          fetch(
+            `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/toys/${params.id}`
+          ),
       },
       {
         path: "/cart/:id}",
@@ -52,7 +60,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/cart/${params.id}`),
+          fetch(
+            `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/cart/${params.id}`
+          ),
       },
       {
         path: "/cart/:id",
@@ -62,7 +72,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/cart/${params.id}`),
+          fetch(
+            `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/cart/${params.id}`
+          ),
       },
       {
         path: `/details/:id`,
@@ -72,7 +84,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/toys/${params.id}`),
+          fetch(
+            `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/toys/${params.id}`
+          ),
       },
 
       {
@@ -83,7 +97,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/toysBrand/${params.id}`),
+          fetch(
+            `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/toysBrand/${params.id}`
+          ),
       },
 
       {

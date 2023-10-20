@@ -22,7 +22,9 @@ const UpdateProduct = () => {
   console.log(brands);
 
   useEffect(() => {
-    fetch("http://localhost:5000/brand")
+    fetch(
+      "https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/brand"
+    )
       .then((res) => res.json())
       .then((data) => setBrand(data));
   }, []);
@@ -52,13 +54,16 @@ const UpdateProduct = () => {
     console.log(updateProduct);
     //send data
 
-    fetch(`http://localhost:5000/toys/${_id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateProduct),
-    })
+    fetch(
+      `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/toys/${_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updateProduct),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
