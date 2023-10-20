@@ -17,6 +17,12 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [cartLoad, setCartLoad] = useState(true);
+
+  const [cart, setCart] = useState(0);
+  const [cartData, setCartData] = useState([]);
+
+  console.log(cartData.length);
 
   // Create User
   const createUser = (email, password) => {
@@ -41,6 +47,20 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // const cartUrl = `http://localhost:5000/cart/${user?.uid}`;
+
+  const fetchData = async () => {
+    try {
+      await fetch(`http://localhost:5000/cart/${user?.uid}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCartData(data);
+        });
+    } catch (error) {
+      console.error("Can not fetch data", error);
+    }
+  };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -58,6 +78,9 @@ const AuthProvider = ({ children }) => {
     logIn,
     logOut,
     googleLogin,
+    cartData,
+    cartLoad,
+    fetchData,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

@@ -1,38 +1,32 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, NavLink, useLoaderData } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const NavBar = () => {
-  const { user, logOut, loading } = useContext(AuthContext);
-  const [cart, setCart] = useState(0);
+  const { user, logOut, cartData } = useContext(AuthContext);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  const cartLen = cartData.length;
   const handleLogOut = () => {
     logOut()
       .then()
       .catch((error) => console.error(error));
   };
-
   useEffect(() => {
-    fetch(`http://localhost:5000/cart/${user?.uid}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCart(data.length);
-        let totalPrice = [];
-        data?.map((b) => {
-          const price = b.price;
-          totalPrice.push(price);
-        });
+    let totalPrice = [];
+    cartData?.map((data) => {
+      const price = data.price;
+      totalPrice.push(price);
+    });
 
-        console.log(totalPrice);
-        let itemPrice = 0;
-        totalPrice?.forEach((price) => {
-          return (itemPrice += parseInt(price));
-        });
-
-        setTotalPrice(itemPrice);
-      });
-  }, [user]);
+    let remainingPrice = 0;
+    totalPrice?.forEach((e) => {
+      const price = parseInt(e);
+      return (remainingPrice += price);
+    });
+    console.log(totalPrice);
+    setTotalPrice(remainingPrice);
+  }, [cartData]);
 
   const navMenu = (
     <>
@@ -109,7 +103,7 @@ const NavBar = () => {
                             />
                           </svg>
                           <span className="badge badge-sm indicator-item">
-                            {cart}
+                            {cartLen}
                           </span>
                         </div>
                       </label>
@@ -118,7 +112,7 @@ const NavBar = () => {
                         className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
                         <div className="card-body">
                           <span className="font-bold text-lg">
-                            {cart} Items
+                            {cartLen} Items
                           </span>
                           <span className="text-info">
                             Subtotal: {totalPrice}

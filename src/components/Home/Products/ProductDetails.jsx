@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
   const [quantityStart, setQuantity] = useState(1);
 
-  const { user } = useContext(AuthContext);
+  const { user, fetchData } = useContext(AuthContext);
   const [alreadyCart, setAlreadyCart] = useState(null);
 
   console.log(alreadyCart);
@@ -70,6 +70,7 @@ const ProductDetails = () => {
             icon: "success",
             confirmButtonText: "Add more",
           });
+          fetchData();
         }
       });
   };
