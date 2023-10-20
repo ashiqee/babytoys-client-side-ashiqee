@@ -31,7 +31,7 @@ const AddProduct = () => {
     //send product data to server
 
     fetch(
-      "https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/toys",
+      "https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/toys",
       {
         method: "POST",
         headers: {
@@ -100,7 +100,6 @@ const AddProduct = () => {
                   required=""
                 /> */}
                 <select
-                  id="category"
                   name="brand"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                   <option>Select Brand</option>

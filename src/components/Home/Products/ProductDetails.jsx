@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Rating from "react-rating";
 
 // import { FaBeer } from "react-icons/fa";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import PageHeader from "../../Shared/PageHeader";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -30,12 +30,12 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetch(
-      `https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/cart/${user.uid}`
+      `https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/cart/${user.uid}`
     )
       .then((res) => res.json())
       .then((data) => {
         data.filter((b) => {
-          if (b.productId === _id) {
+          if (b._id === _id) {
             setAlreadyCart(b.productId);
           }
         });
@@ -67,7 +67,7 @@ const ProductDetails = () => {
     }
 
     fetch(
-      "https://b8a10-brandshop-server-side-ashiqee-8jwlx9iuf-ashiqee.vercel.app/cart",
+      "https://b8a10-brandshop-server-side-ashiqee-co2pwbesn-ashiqee.vercel.app/cart",
       {
         method: "POST",
         headers: {
@@ -78,8 +78,6 @@ const ProductDetails = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         if (data.insertedId) {
           Swal.fire({
             title: "success",
@@ -96,7 +94,7 @@ const ProductDetails = () => {
     <div>
       <PageHeader toyDetails={toyDetails} />
       <div className="max-w-7xl mx-auto ">
-        <div className="lg:flex justify-between">
+        <div className="lg:flex justify-around">
           <div
             className="flex flex-col-reverse  border shadow-lg  bg-white gap-16  rounded-lg md:flex-row
          md:max-w-full p-4  dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -118,15 +116,15 @@ const ProductDetails = () => {
             <h5 className="mb-2 text-xl font-bold tracking-tight text-rose-400 dark:text-white">
               <Link to={`/toysBrand/${brand}`}> Brand: {brand}</Link>
             </h5>
-            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {category}
+            <h5 className="mb-2 text-sm font-bold tracking-tight text-gray-900 dark:text-white">
+              Category: {category}
             </h5>
 
             <div>
               <Rating />
             </div>
 
-            <p className="mb-3 text-xl font-bold text-gray-700 dark:text-gray-400">
+            <p className="mb-3 text-2xl font-bold text-gray-700 dark:text-gray-400">
               ৳ {price}
             </p>
 
