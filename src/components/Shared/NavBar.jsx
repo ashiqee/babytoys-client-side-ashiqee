@@ -63,7 +63,7 @@ const NavBar = () => {
       <div className=" bg-base-200">
         <div className="max-w-screen-xl mx-auto navbar">
           <div className="navbar-start">
-            <div className="dropdown">
+            <div className="dropdown relative z-50">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
