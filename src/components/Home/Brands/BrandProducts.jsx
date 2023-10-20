@@ -31,29 +31,30 @@ const BrandProducts = () => {
 
   useEffect(() => {
     brandProduct?.map((p) => {
-      console.log("setData");
       setDataBrand(p?.brand);
     });
-  }, []);
+  }, [brandProduct]);
 
   return (
     <div>
       {/* card  */}
-      {loading ? (
-        <span className="loading  loading-ball loading-xs"></span>
+      {brandProduct.length < 1 ? (
+        <>
+          <div className="text-center p-24">
+            <h2 className="text-3xl text-rose-700">
+              This Brand Product Not Available
+            </h2>
+          </div>
+          <h3 className="text-2xl p-10 text-center bg-yellow-100 text-black">
+            Please Shop Other Brands Products{" "}
+          </h3>
+          <Brands />
+        </>
       ) : (
         <div className="lg:max-w-screen-2xl md:max-w-screen-lg max-w-lg mx-auto">
-          {brandProduct.length < 1 ? (
+          {loading ? (
             <>
-              <div className="text-center p-24">
-                <h2 className="text-3xl text-rose-700">
-                  This Brand Product Not Available
-                </h2>
-              </div>
-              <h3 className="text-2xl p-10 text-center bg-yellow-100 text-black">
-                Please Shop Other Brands Products{" "}
-              </h3>
-              <Brands />
+              <span className="loading  loading-ball loading-xs"></span>
             </>
           ) : (
             <div>
