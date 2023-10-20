@@ -9,12 +9,14 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const ProductDetails = () => {
-  const navigate = useNavigate();
   const toyDetails = useLoaderData();
+
   const [quantityStart, setQuantity] = useState(1);
 
   const { user, loading } = useContext(AuthContext);
+  const [alreadyCart, setAlreadyCart] = useState(null);
 
+  console.log(alreadyCart);
   const {
     _id,
     productImage,
@@ -41,6 +43,15 @@ const ProductDetails = () => {
       quantityStart,
     };
 
+    if (productId === alreadyCart) {
+      return Swal.fire({
+        title: "error",
+        text: "Already Added in Cart",
+        icon: "error",
+        confirmButtonText: "Add more",
+      });
+    }
+
     fetch("http://localhost:5000/cart", {
       method: "POST",
       headers: {
@@ -59,18 +70,21 @@ const ProductDetails = () => {
             icon: "success",
             confirmButtonText: "Add more",
           });
-          navigate("/");
-        } else {
-          Swal.fire({
-            title: "success",
-            text: "Already Added in Cart",
-            icon: "success",
-            confirmButtonText: "Add more",
-          });
-          return;
         }
       });
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/cart/${user.uid}`)
+      .then((res) => res.json())
+      .then((data) => {
+        data.filter((b) => {
+          if (b.productId === _id) {
+            setAlreadyCart(b.productId);
+          }
+        });
+      });
+  }, [user, _id]);
 
   return (
     <div>
@@ -91,6 +105,9 @@ const ProductDetails = () => {
             </h5>
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               {brand}
+            </h5>
+            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {category}
             </h5>
 
             <div>
