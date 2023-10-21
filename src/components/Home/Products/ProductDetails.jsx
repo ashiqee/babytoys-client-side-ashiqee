@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Rating from "react-rating";
-
+import { AiOutlineStar, AiTwotoneStar } from "react-icons/Ai";
 // import { FaBeer } from "react-icons/fa";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import PageHeader from "../../Shared/PageHeader";
@@ -130,8 +130,14 @@ const ProductDetails = () => {
                 </h5>
 
                 <div className="flex">
-                  <Rating />
-                  {rating}
+                  <Rating
+                    placeholderRating={rating}
+                    emptySymbol={<AiOutlineStar />}
+                    placeholderSymbol={
+                      <AiTwotoneStar className="text-red-400" />
+                    }
+                    fullSymbol={<AiTwotoneStar />}
+                  />
                 </div>
 
                 <p className="mb-3 text-2xl font-bold text-gray-700 dark:text-gray-400">
