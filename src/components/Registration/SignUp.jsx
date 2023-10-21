@@ -73,7 +73,7 @@ const SignUp = () => {
         const user = { email, userName: userName, profilePic };
 
         fetch(
-          "https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/user",
+          "https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/user",
           {
             method: "POST",
             headers: {
@@ -112,7 +112,8 @@ const SignUp = () => {
               <span> Already have an account? </span>
               <Link
                 to="/login"
-                className="text-blue-700 hover:underline dark:text-blue-500">
+                className="text-blue-700 hover:underline dark:text-blue-500"
+              >
                 Login here
               </Link>
             </p>

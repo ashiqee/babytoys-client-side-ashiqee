@@ -13,15 +13,17 @@ const MyCart = () => {
   const { user, fetchData } = useContext(AuthContext);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     fetch(`https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/cart/${user.uid}`)
-  //       .then((res) => res.json())
-  //       .then((data) => setCart(data));
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user) {
+      fetch(
+        `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${user.uid}`
+      )
+        .then((res) => res.json())
+        .then((data) => setCart(data));
+    }
+  }, [user]);
 
-  const handleDeleteFormCart = (_id) => {
+  const handleDeleteFormCart = (id, _id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "Are you sure remove this!",
@@ -34,7 +36,7 @@ const MyCart = () => {
       if (result.isConfirmed) {
         console.log("Deleted Confirm");
         fetch(
-          `https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/cart/${_id}`,
+          `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${_id}`,
           {
             method: "delete",
           }
@@ -48,7 +50,7 @@ const MyCart = () => {
                 " Your Cart Product has been remove.",
                 "success"
               );
-              const remaining = cart.filter((c) => c._id !== _id);
+              const remaining = cart.filter((c) => c.productId !== id);
               setCart(remaining);
               fetchData();
             }
@@ -124,8 +126,9 @@ const MyCart = () => {
                                 />
                               </td>
                               <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Link to={`/details/${cartList._id}`}>
+                                <Link to={`/details/${cartList.productId}`}>
                                   {cartList?.productName}
+                                  {/* {cartList?._id} */}
                                 </Link>
                               </td>
                               <td className="px-6 py-4">
@@ -139,9 +142,13 @@ const MyCart = () => {
                               <td className="px-6 py-4">
                                 <button
                                   onClick={() => {
-                                    handleDeleteFormCart(cartList?.productId);
+                                    handleDeleteFormCart(
+                                      cartList?.productId,
+                                      cartList._id
+                                    );
                                   }}
-                                  className="font-medium text-red-600 dark:text-red-500 hover:underline">
+                                  className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                                >
                                   Remove
                                 </button>
                               </td>

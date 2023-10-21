@@ -16,7 +16,7 @@ const ProductDetails = () => {
   // const [data, setData] = useState([]);
 
   const { user, fetchData } = useContext(AuthContext);
-  const [alreadyCart, setAlreadyCart] = useState(null);
+  const [alreadyCart, setAlreadyCart] = useState();
 
   const {
     _id,
@@ -31,12 +31,12 @@ const ProductDetails = () => {
 
   useEffect(() => {
     fetch(
-      `https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/cart/${user?.uid}`
+      `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${user?.uid}`
     )
       .then((res) => res.json())
       .then((data) => {
         data.filter((b) => {
-          if (b._id === _id) {
+          if (b.productId === _id) {
             setAlreadyCart(b.productId);
             setLoading(false);
           }
@@ -52,12 +52,13 @@ const ProductDetails = () => {
       productId,
       brand,
       price,
-      _id,
+
       productName,
       productImage,
       userId,
       quantityStart,
     };
+    console.log(alreadyCart);
 
     if (productId === alreadyCart) {
       return Swal.fire({
@@ -66,31 +67,31 @@ const ProductDetails = () => {
         icon: "error",
         confirmButtonText: "Add more",
       });
-    }
-
-    fetch(
-      "https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/cart",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(userCart),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            title: "success",
-            text: "Product Added to Cart Successfully",
-            icon: "success",
-            confirmButtonText: "Add more",
-          });
-          fetchData();
-          navigate("/");
+    } else {
+      fetch(
+        "https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userCart),
         }
-      });
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            Swal.fire({
+              title: "success",
+              text: "Product Added to Cart Successfully",
+              icon: "success",
+              confirmButtonText: "Add more",
+            });
+            fetchData();
+            navigate("/");
+          }
+        });
+    }
   };
 
   return (
@@ -104,7 +105,8 @@ const ProductDetails = () => {
             <div className="lg:flex justify-around">
               <div
                 className="flex flex-col-reverse  border shadow-lg  bg-white gap-16  rounded-lg md:flex-row
-         md:max-w-full p-4  dark:bg-gray-800 dark:hover:bg-gray-700">
+         md:max-w-full p-4  dark:bg-gray-800 dark:hover:bg-gray-700"
+              >
                 <img
                   className="object-cover  w-24 h-24  p-2  rounded-lg"
                   src={productImage}
@@ -152,20 +154,23 @@ const ProductDetails = () => {
                             }
                             count - 1;
                           })
-                        }>
+                        }
+                      >
                         -
                       </button>
                       <h2 className="text-2xl">{quantityStart}</h2>
                       <button
                         className="p-2 text-xl"
-                        onClick={() => setQuantity((count) => count + 1)}>
+                        onClick={() => setQuantity((count) => count + 1)}
+                      >
                         +
                       </button>
                     </div>
                   </div>
                   <button
                     onClick={() => handleAddToCart(_id)}
-                    className="btn mt-6 bg-blue-300">
+                    className="btn mt-6 bg-blue-300"
+                  >
                     {" "}
                     Add Cart
                   </button>
@@ -186,17 +191,20 @@ const ProductDetails = () => {
                     <label
                       htmlFor="my-drawer-3"
                       aria-label="open sidebar"
-                      className="btn btn-square btn-ghost">
+                      className="btn btn-square btn-ghost"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        className="inline-block w-6 h-6 stroke-current">
+                        className="inline-block w-6 h-6 stroke-current"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
-                          d="M4 6h16M4 12h16M4 18h16"></path>
+                          d="M4 6h16M4 12h16M4 18h16"
+                        ></path>
                       </svg>
                     </label>
                   </div>
@@ -222,7 +230,8 @@ const ProductDetails = () => {
                 <label
                   htmlFor="my-drawer-3"
                   aria-label="close sidebar"
-                  className="drawer-overlay"></label>
+                  className="drawer-overlay"
+                ></label>
                 <ul className="menu p-4 w-80 min-h-full bg-base-200">
                   {/* Sidebar content here */}
                   <li>

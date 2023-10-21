@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <Home />,
         loader: () =>
           fetch(
-            "https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/toys"
+            "https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/toys"
           ),
       },
       {
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         ),
         loader: () =>
           fetch(
-            "https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/brand"
+            "https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/brand"
           ),
       },
 
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/toys/${params.id}`
+            `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/toys/${params.id}`
           ),
       },
       {
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/cart/${params.id}`
+            `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${params.id}`
           ),
       },
       {
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/cart/${params.id}`
+            `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${params.userId}`
           ),
       },
       {
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/toys/${params.id}`
+            `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/toys/${params.id}`
           ),
       },
 
@@ -98,7 +98,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://b8a10-brandshop-server-side-ashiqee-n20o3byuc-ashiqee.vercel.app/toysBrand/${params.id}`
+            `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/toysBrand/${params.id}`
           ),
       },
 
