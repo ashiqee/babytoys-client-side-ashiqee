@@ -16,7 +16,7 @@ const MyCart = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${user?.uid}`
+        `https://b8a10-brandshop-server-side-ashiqee-dkn146col-ashiqee.vercel.app/cart/${user?.uid}`
       )
         .then((res) => res.json())
         .then((data) => setCart(data));
@@ -36,7 +36,7 @@ const MyCart = () => {
       if (result.isConfirmed) {
         console.log("Deleted Confirm");
         fetch(
-          `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${_id}`,
+          `https://b8a10-brandshop-server-side-ashiqee-dkn146col-ashiqee.vercel.app/cart/${_id}`,
           {
             method: "delete",
           }

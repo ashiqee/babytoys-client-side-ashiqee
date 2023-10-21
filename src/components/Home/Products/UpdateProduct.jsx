@@ -20,7 +20,7 @@ const UpdateProduct = () => {
 
   useEffect(() => {
     fetch(
-      "https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/brand"
+      "https://b8a10-brandshop-server-side-ashiqee-dkn146col-ashiqee.vercel.app/brand"
     )
       .then((res) => res.json())
       .then((data) => setBrand(data));
@@ -53,7 +53,7 @@ const UpdateProduct = () => {
     //send data
 
     fetch(
-      `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/toys/${_id}`,
+      `https://b8a10-brandshop-server-side-ashiqee-dkn146col-ashiqee.vercel.app/toys/${_id}`,
       {
         method: "PUT",
         headers: {

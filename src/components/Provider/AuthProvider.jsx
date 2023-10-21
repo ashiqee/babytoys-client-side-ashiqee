@@ -45,12 +45,12 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  // const cartUrl = `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${user?.uid}`;
+  // const cartUrl = `https://b8a10-brandshop-server-side-ashiqee-dkn146col-ashiqee.vercel.app/cart/${user?.uid}`;
 
   const fetchData = async () => {
     try {
       await fetch(
-        `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${user?.uid}`
+        `https://b8a10-brandshop-server-side-ashiqee-dkn146col-ashiqee.vercel.app/cart/${user?.uid}`
       )
         .then((res) => res.json())
         .then((data) => {

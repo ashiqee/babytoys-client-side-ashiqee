@@ -31,7 +31,7 @@ const AddProduct = () => {
     //send product data to server
 
     fetch(
-      "https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/toys",
+      "https://b8a10-brandshop-server-side-ashiqee-dkn146col-ashiqee.vercel.app/toys",
       {
         method: "POST",
         headers: {
