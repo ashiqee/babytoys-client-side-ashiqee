@@ -5,8 +5,6 @@ import Brands from "./Brands";
 
 import BrandSlider from "./BrandSlider";
 import { useEffect, useState } from "react";
-import { useContext } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
 
 const BrandProducts = () => {
   const [loading, setLoading] = useState(true);

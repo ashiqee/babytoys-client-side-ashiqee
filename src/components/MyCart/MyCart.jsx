@@ -16,7 +16,7 @@ const MyCart = () => {
   useEffect(() => {
     if (user) {
       fetch(
-        `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${user.uid}`
+        `https://b8a10-brandshop-server-side-ashiqee-pxb6h4qs6-ashiqee.vercel.app/cart/${user?.uid}`
       )
         .then((res) => res.json())
         .then((data) => setCart(data));
@@ -50,7 +50,7 @@ const MyCart = () => {
                 " Your Cart Product has been remove.",
                 "success"
               );
-              const remaining = cart.filter((c) => c.productId !== id);
+              const remaining = cart?.filter((c) => c.productId !== id);
               setCart(remaining);
               fetchData();
             }

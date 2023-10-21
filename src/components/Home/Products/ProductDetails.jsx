@@ -129,8 +129,9 @@ const ProductDetails = () => {
                   Category: {category}
                 </h5>
 
-                <div>
+                <div className="flex">
                   <Rating />
+                  {rating}
                 </div>
 
                 <p className="mb-3 text-2xl font-bold text-gray-700 dark:text-gray-400">
